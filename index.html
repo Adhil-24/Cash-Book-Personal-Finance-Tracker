@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Book - Personal Finance Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button id="settingsBtn" class="settings-btn">⚙️ Settings</button> <!-- Settings Button -->
+            <h1>💰 Cash Book</h1>
+            <p>Track your income and expenses easily</p>
+        </header>
+
+        <div class="summary">
+            <div class="balance-card">
+                <h3>Current Balance</h3>
+                <span id="balance" class="amount">₹0.00</span>
+            </div>
+            <div class="income-card">
+                <h3>Total Income</h3>
+                <span id="total-income" class="amount positive">₹0.00</span>
+            </div>
+            <div class="expense-card">
+                <h3>Total Expenses</h3>
+                <span id="total-expense" class="amount negative">₹0.00</span>
+            </div>
+        </div>
+
+        <div class="transaction-form">
+            <h2>Add New Transaction</h2>
+            <form id="transactionForm">
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" placeholder="Enter description" required>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Amount (₹)</label>
+                    <input type="number" id="amount" placeholder="Enter amount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="type">Transaction Type</label>
+                    <select id="type" required>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Time</label>
+                    <input type="time" id="time" required>
+                </div>
+                <button type="submit">Add Transaction</button>
+                <button id="exportCsvBtn">Export CSV</button>
+            </form>
+        </div>
+
+        <div class="transactions">
+            <h2>Transaction History</h2>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="income">Income</button>
+                <button class="filter-btn" data-filter="expense">Expense</button>
+                <button class="filter-btn" data-filter="daily">Daily</button>
+                <button class="filter-btn" data-filter="weekly">Weekly</button>
+                <button class="filter-btn" data-filter="monthly">Monthly</button>
+                <button class="filter-btn" data-filter="yearly">Yearly</button>
+                <button id="clearAllBtn" class="clear-btn">Clear All Transactions</button>
+            </div>
+            <div id="transactionList" class="transaction-list">
+                <p class="empty-message">No transactions yet. Add your first transaction!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="settings-modal">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h2>Settings</h2>
+                <button id="closeSettings" class="close-btn">×</button>
+            </div>
+            
+            <div class="settings-tabs">
+                <button class="tab-btn active" data-tab="calculator">Calculator</button>
+                <button class="tab-btn" data-tab="notebook">Notebook</button>
+            </div>
+            
+            <div class="settings-body">
+                <!-- Calculator Tab -->
+                <div id="calculatorTab" class="tab-content active">
+                    <div class="calculator">
+                        <div class="calculator-display">
+                            <input type="text" id="calcDisplay" readonly>
+                        </div>
+                        <div class="calculator-buttons">
+                            <button class="calc-btn" data-value="C">C</button>
+                            <button class="calc-btn" data-value="AC">AC</button>
+                            <button class="calc-btn" data-value="%">%</button>
+                            <button class="calc-btn operator" data-value="/">÷</button>
+                            
+                            <button class="calc-btn" data-value="7">7</button>
+                            <button class="calc-btn" data-value="8">8</button>
+                            <button class="calc-btn" data-value="9">9</button>
+                            <button class="calc-btn operator" data-value="*">×</button>
+                            
+                            <button class="calc-btn" data-value="4">4</button>
+                            <button class="calc-btn" data-value="5">5</button>
+                            <button class="calc-btn" data-value="6">6</button>
+                            <button class="calc-btn operator" data-value="-">-</button>
+                            
+                            <button class="calc-btn" data-value="1">1</button>
+                            <button class="calc-btn" data-value="2">2</button>
+                            <button class="calc-btn" data-value="3">3</button>
+                            <button class="calc-btn operator" data-value="+">+</button>
+                            
+                            <button class="calc-btn" data-value="0">0</button>
+                            <button class="calc-btn" data-value=".">.</button>
+                            <button class="calc-btn" data-value="±">±</button>
+                            <button class="calc-btn operator" data-value="=">=</button>
+                        </div>
+                        <button id="useCalcResult" class="use-result-btn">Use Result in Amount Field</button>
+                    </div>
+                </div>
+                
+                <!-- Notebook Tab -->
+                <div id="notebookTab" class="tab-content">
+                    <div class="notebook">
+                        <textarea id="notesArea" placeholder="Write your notes here..."></textarea>
+                        <div class="notebook-actions">
+                            <button id="saveNotes" class="notes-btn">Save Notes</button>
+                            <button id="clearNotes" class="notes-btn">Clear Notes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Debugging logs
+        document.getElementById('transactionForm').addEventListener('submit', (e) => {
+            console.log('Form submitted');
+        });
+    </script>
+</body>
+</html>
